@@ -1,0 +1,978 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f6f6f6;
+    color: #292929;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 233px;
+    background: #ffffff;
+    border-right: 1px solid #eeeeee;
+
+    display: flex;
+    flex-direction: column;
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.sidebar-logo {
+    height: 66px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 20px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+
+    background: #079b70;
+
+    color: white;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-nav {
+    padding: 17px 9px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 11px 13px;
+
+    margin-bottom: 5px;
+
+    text-decoration: none;
+
+    color: #5e5e5e;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+}
+
+.nav-item i {
+    font-size: 17px;
+}
+
+.nav-item:hover {
+    background: #f0faf6;
+    color: #008d68;
+}
+
+.nav-item.active {
+    background: #e8faf3;
+    color: #008d68;
+}
+
+.sidebar-profile {
+    margin-top: auto;
+
+    padding: 18px 20px;
+
+    border-top: 1px solid #eeeeee;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.profile-avatar {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: #d7f8ec;
+
+    color: #079b70;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 600;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.profile-info strong {
+    font-size: 14px;
+}
+
+.profile-info span {
+    color: #999;
+    font-size: 12px;
+}
+
+/* MAIN CONTENT */
+.main-content {
+    margin-left: 233px;
+
+    width: calc(100% - 233px);
+
+    padding: 25px 30px;
+}
+
+.transactions-container {
+    max-width: 835px;
+
+    margin: 0 auto;
+}
+
+/* HEADER */
+.page-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 27px;
+}
+
+.page-header h1 {
+    font-size: 26px;
+
+    margin-bottom: 5px;
+}
+
+.page-header p {
+    font-size: 14px;
+
+    color: #aaa6a3;
+}
+
+.add-expense-button {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    background: #079b70;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 11px;
+
+    padding: 11px 17px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.add-expense-button:hover {
+    background: #058a63;
+}
+
+/* FILTER */
+
+.filter-card {
+    background: white;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 16px;
+
+    padding: 15px 17px;
+
+    display: grid;
+
+    grid-template-columns: 1.55fr 0.8fr 0.9fr 0.9fr;
+
+    gap: 11px;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+
+    margin-bottom: 15px;
+}
+
+.search-box {
+    height: 43px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 12px;
+
+    color: #c6c3c1;
+}
+
+.search-box i {
+    font-size: 15px;
+
+    margin-right: 10px;
+}
+
+.search-box input {
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    font-size: 14px;
+
+    color: #555;
+}
+
+.search-box input::placeholder {
+    color: #c8c5c3;
+}
+
+.filter-select {
+    height: 43px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 8px;
+
+    padding: 0 12px;
+
+    background: white;
+
+    color: #555;
+
+    font-size: 14px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+/* SUMMARY */
+.transaction-summary {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 0 5px 12px;
+
+    font-size: 12px;
+
+    color: #999590;
+}
+
+.transaction-summary span:last-child {
+    color: #66615e;
+}
+
+/* TRANSACTION CARD */
+
+.transaction-card {
+    background: white;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* TABLE HEADER */
+
+.transaction-header {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        100px
+        85px
+        100px
+        100px;
+
+    align-items: center;
+
+    height: 40px;
+
+    padding: 0 20px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    color: #aaa6a3;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+/* TRANSACTION ROW */
+
+.transaction-row {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        100px
+        85px
+        100px
+        100px;
+
+    align-items: center;
+
+    min-height: 62px;
+
+    padding: 0 20px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    font-size: 13px;
+}
+
+.transaction-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.edit-expense-button,
+.delete-expense-button {
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.edit-expense-button svg,
+.delete-expense-button svg {
+    width: 17px;
+    height: 17px;
+}
+
+.edit-expense-button:hover,
+.delete-expense-button:hover {
+    background: #f1f5f9;
+}
+
+.transaction-row:last-child {
+    border-bottom: none;
+}
+
+.transaction-row:hover {
+    background: #fafafa;
+}
+
+/* EXPENSE */
+
+.expense-column {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.expense-icon {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    font-size: 16px;
+}
+
+.food-icon {
+    background: #fff4e8;
+}
+
+.transport-icon {
+    background: #eef6ff;
+}
+
+.education-icon {
+    background: #f1edff;
+}
+
+.entertainment-icon {
+    background: #fffbe8;
+}
+
+.shopping-icon {
+    background: #fff0f7;
+}
+
+.expense-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+
+    min-width: 0;
+}
+
+.expense-info strong {
+    font-size: 14px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.expense-info span {
+    font-size: 12px;
+
+    color: #aaa6a3;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+/* CATEGORY BADGE */
+.category-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 500;
+}
+
+.category-badge.food {
+    background: #fff4e8;
+    color: #ff7210;
+}
+
+.category-badge.transport {
+    background: #edf5ff;
+    color: #1769ff;
+}
+
+.category-badge.education {
+    background: #f2edff;
+    color: #702cff;
+}
+
+.category-badge.entertainment {
+    background: #fff9dd;
+    color: #d99000;
+}
+
+.category-badge.shopping {
+    background: #fff0f8;
+    color: #ec1680;
+}
+
+/*
+   DATE */
+
+.transaction-date {
+    color: #aaa6a3;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+/*
+   AMOUNT */
+
+.transaction-amount {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+/*
+   RESPONSIVE */
+
+@media (max-width: 950px) {
+    .transactions-container {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 800px) {
+    .filter-card {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .search-box {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        width: 70px;
+    }
+
+    .sidebar-logo {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .sidebar-logo span,
+    .nav-item span,
+    .profile-info {
+        display: none;
+    }
+
+    .nav-item {
+        justify-content: center;
+    }
+
+    .sidebar-profile {
+        justify-content: center;
+        padding: 15px 5px;
+    }
+
+    .main-content {
+        margin-left: 70px;
+
+        width: calc(100% - 70px);
+
+        padding: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .page-header {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .filter-card {
+        grid-template-columns: 1fr;
+    }
+
+    .search-box {
+        grid-column: auto;
+    }
+
+    .transaction-card {
+        overflow-x: auto;
+    }
+
+    .transaction-header,
+    .transaction-row {
+        min-width: 650px;
+    }
+}
+
+/*
+   ADD EXPENSE MODAL */
+
+/* Overlay */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.38);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 9999;
+
+    /* Awalnya disembunyikan */
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease;
+}
+
+/* Modal aktif */
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal Card */
+
+.expense-modal {
+    width: 100%;
+
+    max-width: 450px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+
+    transform: translateY(10px) scale(0.98);
+
+    transition: transform 0.2s ease;
+}
+
+/* Animation ketika muncul */
+
+.modal-overlay.show .expense-modal {
+    transform: translateY(0) scale(1);
+}
+
+/*
+   MODAL HEADER */
+
+.modal-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: 21px 24px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.modal-header h2 {
+    font-size: 18px;
+
+    margin-bottom: 5px;
+}
+
+.modal-header p {
+    font-size: 13px;
+
+    color: #aaa6a3;
+}
+
+.modal-close {
+    border: none;
+
+    background: transparent;
+
+    color: #aaa6a3;
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    padding: 0;
+
+    margin-top: -2px;
+}
+
+.modal-close:hover {
+    color: #555;
+}
+
+/*
+   MODAL BODY */
+
+.modal-body {
+    padding: 20px 24px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+
+    font-size: 13px;
+
+    color: #55514e;
+
+    margin-bottom: 7px;
+}
+
+.form-group label span {
+    color: #aaa6a3;
+}
+
+/* Input, Select, Textarea */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #333;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group input,
+.form-group select {
+    height: 42px;
+
+    padding: 0 13px;
+}
+
+.form-group textarea {
+    height: 62px;
+
+    padding: 12px 13px;
+
+    resize: none;
+}
+
+/* Placeholder */
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #c7c3c1;
+}
+
+/* Focus */
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #079b70;
+
+    box-shadow: 0 0 0 3px rgba(7, 155, 112, 0.08);
+}
+
+/* Category + Date */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+}
+
+/* MODAL FOOTER */
+
+.modal-footer {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    padding: 16px 24px;
+
+    border-top: 1px solid #eeeeee;
+}
+
+/* Cancel */
+
+.cancel-button {
+    height: 42px;
+
+    background: white;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 8px;
+
+    color: #55514e;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    background: #f8f8f8;
+}
+
+/* Save */
+
+.save-button {
+    height: 42px;
+
+    background: #079b70;
+
+    border: 1px solid #079b70;
+
+    border-radius: 8px;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.save-button:hover {
+    background: #058a63;
+}
+
+.sidebar-auth-action {
+    margin-top: 10px;
+    padding: 0 16px;
+}
+
+/* Logout */
+.sidebar-logout-button {
+    width: 100%;
+    height: 38px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #ef4444;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.sidebar-logout-button:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+/* Register / Login */
+.sidebar-login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 38px;
+
+    box-sizing: border-box;
+
+    border-radius: 9px;
+
+    background: #059669;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.sidebar-login-button:hover {
+    background: #047857;
+    color: #ffffff;
+}
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+    .expense-modal {
+        max-width: 100%;
+    }
+
+    .modal-header {
+        padding: 18px 20px;
+    }
+
+    .modal-body {
+        padding: 18px 20px;
+    }
+
+    .modal-footer {
+        padding: 14px 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
