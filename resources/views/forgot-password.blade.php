@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login - Spendly</title>
+    <title>Forgot Password - Spendly</title>
 
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
 </head>
@@ -22,63 +22,43 @@
 
         <div class="auth-card">
 
-            <h2>Welcome back</h2>
+            <h2>Forgot Password?</h2>
 
             <p class="auth-description">
-                Login to your Spendly account.
+                Enter your email and we will send you a password reset link.
             </p>
 
             <div id="authMessage" class="auth-message"></div>
 
-            <form id="loginForm">
+            <form id="forgotPasswordForm">
 
                 <div class="form-group">
-                    <label for="email">
+                    <label for="resetEmail">
                         Email
                     </label>
 
                     <input
                         type="email"
-                        id="email"
+                        id="resetEmail"
                         name="email"
                         placeholder="Enter your email"
                         required
                     >
                 </div>
 
-                <div class="form-group">
-                    <label for="password">
-                        Password
-                    </label>
-
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Enter your password"
-                        required
-                    >
-
-                    <div class="forgot-password">
-                        <a href="{{ route('forgot-password') }}">
-                            Forgot Password?
-                        </a>
-                    </div>
-                </div>
-
                 <button
                     type="submit"
                     class="auth-button"
-                    id="loginButton"
+                    id="resetPasswordButton"
                 >
-                    Login
+                    Send Reset Link
                 </button>
 
             </form>
 
             <div class="auth-switch">
-                Don't have an account?
-                <a href="{{ route('register') }}">Create an account</a>
+                Remember your password?
+                <a href="{{ route('login') }}">Back to Login</a>
             </div>
 
         </div>

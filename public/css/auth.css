@@ -157,6 +157,70 @@ body {
     color: #9ca3af;
 }
 
+/* FORGOT PASSWORD */
+
+.forgot-password {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.forgot-password a {
+    color: #4f46e5;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.forgot-password a:hover {
+    color: #3730a3;
+    text-decoration: underline;
+}
+
+#forgotPasswordForm {
+    margin-top: 24px;
+}
+
+#forgotPasswordForm .form-group {
+    margin-bottom: 24px;
+}
+
+#forgotPasswordForm input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#forgotPasswordForm .auth-button {
+    width: 100%;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+#forgotPasswordForm .auth-button:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+#forgotPasswordForm .auth-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Responsive */
+
+@media (max-width: 480px) {
+    .forgot-password {
+        margin-top: 10px;
+    }
+
+    #forgotPasswordForm {
+        margin-top: 20px;
+    }
+}
+
 @media (max-width: 480px) {
     .auth-page {
         padding: 16px;

@@ -3,6 +3,7 @@ import { auth, database } from "./firebase";
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    sendPasswordResetEmail,
     updateProfile,
     onAuthStateChanged,
     signOut,
@@ -150,6 +151,46 @@ if (loginForm) {
     });
 }
 
+// FORGOT PASSWORD
+const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+
+if (forgotPasswordForm) {
+    forgotPasswordForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById("resetEmail").value.trim();
+
+        const resetPasswordButton = document.getElementById(
+            "resetPasswordButton",
+        );
+
+        try {
+            setButtonLoading(resetPasswordButton, true, "Send Reset Link");
+
+            showMessage("");
+
+            await sendPasswordResetEmail(auth, email);
+
+            console.log("Password reset email berhasil dikirim untuk:", email);
+
+            showMessage(
+                "Password reset link telah dikirim ke email Anda.",
+                "success",
+            );
+
+            forgotPasswordForm.reset();
+
+            setButtonLoading(resetPasswordButton, false, "Send Reset Link");
+        } catch (error) {
+            console.error(error);
+
+            showMessage(getFirebaseErrorMessage(error.code));
+
+            setButtonLoading(resetPasswordButton, false, "Send Reset Link");
+        }
+    });
+}
+
 // FIREBASE ERROR MESSAGE
 function getFirebaseErrorMessage(errorCode) {
     switch (errorCode) {
@@ -176,6 +217,9 @@ function getFirebaseErrorMessage(errorCode) {
 
         case "auth/too-many-requests":
             return "Terlalu banyak percobaan. Coba lagi nanti.";
+
+        case "auth/missing-email":
+            return "Email wajib diisi.";
 
         default:
             return "Terjadi kesalahan. Silakan coba lagi.";
