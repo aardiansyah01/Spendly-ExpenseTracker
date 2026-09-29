@@ -10,10 +10,17 @@ class FirebaseAuthService
 
     public function __construct()
     {
+        $credentials = env('FIREBASE_CREDENTIALS');
+
+        if ($credentials) {
+            $credentials = json_decode($credentials, true);
+        } else {
+            $credentials = storage_path('app/firebase/service-account.json');
+        }
+
         $factory = (new Factory)
-            ->withServiceAccount(
-                storage_path('app/firebase/service-account.json')
-            );
+            ->withServiceAccount($credentials);
+
         $this->auth = $factory->createAuth();
     }
 
