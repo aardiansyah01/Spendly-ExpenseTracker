@@ -10,10 +10,20 @@ class FirebaseAuthService
 
     public function __construct()
     {
-        $credentials = env('FIREBASE_CREDENTIALS');
+        $credentialsBase64 = env('FIREBASE_CREDENTIALS_BASE64');
 
-        if ($credentials) {
-            $credentials = json_decode($credentials, true);
+        if ($credentialsBase64) {
+            $credentialsJson = base64_decode($credentialsBase64, true);
+
+            if ($credentialsJson === false) {
+                throw new \RuntimeException('Invalid Firebase credentials encoding.');
+            }
+
+            $credentials = json_decode($credentialsJson, true);
+
+            if (!is_array($credentials)) {
+                throw new \RuntimeException('Invalid Firebase credentials JSON.');
+            }
         } else {
             $credentials = storage_path('app/firebase/service-account.json');
         }
