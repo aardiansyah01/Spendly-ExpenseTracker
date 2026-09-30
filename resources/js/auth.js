@@ -4,6 +4,7 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     sendPasswordResetEmail,
+    sendEmailVerification,
     updateProfile,
     onAuthStateChanged,
     signOut,
@@ -78,6 +79,16 @@ if (registerForm) {
                 displayName: name,
             });
 
+            console.log("Current origin:", window.location.origin);
+            console.log("Verification URL:", `${window.location.origin}/login`);
+
+            const actionCodeSettings = {
+                url: `${window.location.origin}/login`,
+                handleCodeInApp: false,
+            };
+
+            await sendEmailVerification(user, actionCodeSettings);
+
             // Save to Realtime Database
             await set(ref(database, `users/${user.uid}`), {
                 name: name,
@@ -88,13 +99,11 @@ if (registerForm) {
             console.log("User registered:", user.uid);
 
             showMessage(
-                "Account berhasil dibuat. Mengarahkan ke dashboard...",
+                "Account berhasil dibuat. Silakan cek email Anda untuk melakukan verifikasi agar dapat melanjutkan ke halaman login.",
                 "success",
             );
 
-            setTimeout(() => {
-                window.location.href = "/dashboard";
-            }, 1000);
+            await signOut(auth);
         } catch (error) {
             console.error(error);
 
@@ -130,6 +139,19 @@ if (loginForm) {
             );
 
             const user = userCredential.user;
+
+            await user.reload();
+
+            if (!user.emailVerified) {
+                await signOut(auth);
+
+                showMessage(
+                    "Email Anda belum diverifikasi. Silakan cek email dan klik link verifikasi terlebih dahulu.",
+                );
+
+                setButtonLoading(loginButton, false, "Login");
+                return;
+            }
 
             console.log("User logged in:", user.uid);
 

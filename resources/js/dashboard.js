@@ -503,6 +503,78 @@ function escapeHtml(value) {
         .replace(/'/g, "&#039;");
 }
 
+// QUICK ADD
+const quickAddAmount = document.getElementById("quickAddAmount");
+const quickAddCategory = document.getElementById("quickAddCategory");
+const quickAddButton = document.getElementById("quickAddButton");
+
+if (quickAddButton) {
+    quickAddButton.addEventListener("click", async () => {
+        const amountText = quickAddAmount.value.trim();
+        const category = quickAddCategory.value;
+
+        const amount = Number(amountText.replace(/\D/g, ""));
+
+        if (!amount || amount <= 0) {
+            alert("Masukkan nominal yang valid.");
+            return;
+        }
+
+        const user = auth.currentUser;
+
+        if (!user) {
+            alert("Silakan login terlebih dahulu.");
+            return;
+        }
+
+        try {
+            quickAddButton.disabled = true;
+            quickAddButton.textContent = "Adding...";
+
+            const idToken = await user.getIdToken();
+
+            const response = await fetch("/api/expenses", {
+                method: "POST",
+
+                headers: {
+                    Authorization: `Bearer ${idToken}`,
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+
+                body: JSON.stringify({
+                    name: "Quick Add",
+                    amount: amount,
+                    category: category,
+                    date: new Date().toISOString(),
+                }),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || "Failed to add expense.");
+            }
+
+            console.log("Quick Add berhasil:", result);
+
+            quickAddAmount.value = "";
+
+            await loadDashboardExpenses(user);
+        } catch (error) {
+            console.error("Quick Add error:", error);
+
+            alert(
+                error.message ||
+                    "Gagal menambahkan expense. Silakan coba lagi.",
+            );
+        } finally {
+            quickAddButton.disabled = false;
+            quickAddButton.textContent = "+ Add";
+        }
+    });
+}
+
 // FIREBASE AUTH
 onAuthStateChanged(auth, (user) => {
     if (!user) {

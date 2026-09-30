@@ -246,27 +246,24 @@
                             <span>Quick Add</span>
                         </div>
 
-
                         <div class="quick-add-form">
 
                             <input
                                 type="text"
+                                id="quickAddAmount"
                                 placeholder="Rp 25.000"
-                                value="Rp 25.000"
                             >
 
-                            <select>
-
-                                <option>Food</option>
-                                <option>Bills</option>
-                                <option>Education</option>
-                                <option>Shopping</option>
-                                <option>Technology</option>
-                                <option>Transport</option>
-
+                            <select id="quickAddCategory">
+                                <option value="Food">Food</option>
+                                <option value="Bills">Bills</option>
+                                <option value="Education">Education</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Transport">Transport</option>
                             </select>
 
-                            <button>
+                            <button type="button" id="quickAddButton">
                                 + Add
                             </button>
 
